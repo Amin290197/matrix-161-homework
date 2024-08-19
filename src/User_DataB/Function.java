@@ -26,10 +26,9 @@ public class Function {
         stmt.setString(1, name);
         stmt.setString(2, surname);
         stmt.setInt(3, age);
-        closeConnection(conn);
-        if (!stmt.execute()) {
+        if (!stmt.execute()){
             System.out.println("User dded successfully");
-        } else {
+        }else {
             System.out.println("Failed to add user");
         }
     }
@@ -42,7 +41,6 @@ public class Function {
         while (rs.next()) {
             User user = new User(rs.getInt("id"), rs.getString("name"),
                     rs.getString("surname"), rs.getInt("age"));
-            closeConnection(conn);
             return user;
         }
         return new User(null, null, null, 0);
@@ -57,11 +55,9 @@ public class Function {
             User user = new User(rs.getInt("id"), rs.getString("name"),
                     rs.getString("surname"), rs.getInt("age"));
             users.add(user);
-            closeConnection(conn);
         }
         return users;
     }
-
     // work
     public static void updateUserById(Integer id, String name, String surname, Integer age) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("update users set name = ?, " +
@@ -71,18 +67,15 @@ public class Function {
         stmt.setInt(3, age);
         stmt.setInt(4, id);
         stmt.executeUpdate();
-        closeConnection(conn);
     }
-
     // work
     public static void deleteUserById(Integer id) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("delete from users where id = ?");
         stmt.setInt(1, id);
         stmt.executeUpdate();
-        closeConnection(conn);
     }
 
-    public static void closeConnection(Connection conn) throws SQLException {
+    public static void closeConnection() throws SQLException {
         conn.close();
     }
 
@@ -91,7 +84,6 @@ public class Function {
         int result = sc.nextInt();
         return result;
     }
-
     public static String getStr(String message) {
         System.out.println(message);
         String result = sc.next();
