@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Function {
-    static final String user = "postgres";
-    static final String url = "jdbc:postgresql://localhost:5432/matrix_161";
+    static String user;
+    static String url;
     static final String password = "";
     static Connection conn;
     static Scanner sc = new Scanner(System.in);
